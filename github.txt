@@ -1,0 +1,56 @@
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789
+$ git init
+Initialized empty Git repository in C:/Users/Administrator/Desktop/789/.git/
+
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789 (master)
+$ touch README
+
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789 (master)
+$ git add README
+
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789 (master)
+$ git commit -m "read"
+[master (root-commit) ba8059d] read
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README
+
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789 (master)
+$ git remote add origin git@github.com:Tempo59/test.git
+
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789 (master)
+$ git push -u origin master
+To github.com:Tempo59/test.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'git@github.com:Tempo59/test.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789 (master)
+$ git pull --rebase origin master
+warning: no common commits
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From github.com:Tempo59/test
+ * branch            master     -> FETCH_HEAD
+ * [new branch]      master     -> origin/master
+First, rewinding head to replay your work on top of it...
+Applying: read
+
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789 (master)
+$ git push -u origin master
+Counting objects: 3, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 266 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To github.com:Tempo59/test.git
+   37fbaa4..2ac664c  master -> master
+Branch master set up to track remote branch master from origin.
+
+Administrator@UMMMZHE4GX4KT68 MINGW64 ~/Desktop/789 (master)
+$
