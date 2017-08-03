@@ -1,0 +1,151 @@
+一、默写：
+  1.设计一个成员内部类，在主方法中创建成员内部类对象并调用方法
+public class Out{
+	public class In{
+		public void fun(){}
+	}
+}
+public class Test{
+	public static void main(String[] args){
+		Out o = new Out();
+		Out.In i = o.new In();
+		i.fun();
+	}
+}
+
+
+  2.设计一个接口，在主方法中使用匿名内部类创建接口实现类对象并调用方法
+public interface I{
+	public abstract void fun();
+}
+public class Test{
+	public static void main(String[]args){
+		I i = new I(){
+			public void fun(){}
+		};
+		i.fun();
+
+		new I(){public void fun(){}}.fun();
+	}
+}
+
+  3.static关键字的用法
+
+二、作业+回顾：
+
+三、泛型：
+  1.什么是泛型：
+	表示一个广泛类型的类型参数
+	在类或接口或方法中会使用到的一个未知的类型
+
+  2.泛型的声明：
+	格式：<标识符>
+	1）声明在方法中的泛型：泛型方法
+	public <标识符> void fun (){}
+	2）声明在类中的泛型：泛型类
+	public class 类名<标识符>{}
+	3）声明在接口中的泛型：泛型接口
+	public interface 接口名<标识符>{}
+
+  3.声明泛型的规范：
+	1）泛型名称可以是任意的合法标识符，一般情况使用一个大写字符表示
+	2）泛型的作用域：只能在声明的位置使用
+	3）泛型的类型取决于创建对象时传入的实际类型
+
+  4.注意事项：
+	1）使用泛型不可以声明静态的属性，不能使用泛型声明常量属性；
+	2）使用泛型不能初始化数组，但是可以声明数组；
+	3）使用泛型不能声明重载方法
+	4）使用不同类型创建的泛型类对象的引用不可以相互赋值
+
+  5.受限泛型：
+	1）<? super T>：传入的类型是T类或T类的父类
+	2）<? extends T>：T或T的子类
+	3）<?>：表示任意类型
+
+补充：泛型可以作为类的属性，可以作为成员方法的参数，可以作为成员方法的返回值
+
+四、集合的框架结构：
+	Collection接口、Map接口
+  1.Collection接口表示线性集合
+	Map接口表示映射性集合
+
+  2.Collection接口的子接口：
+	List接口：ArrayList，LinkedList，Vector，Stack
+	Set接口：HashSet，LinkedHashSet，TreeSet
+
+  3.Map接口：
+	HashMap、LinkedHashMap、Hashtable、Properties、TreeMap
+
+五、Collection接口中的方法
+	集合也是一个容器，是一个不定长的容器
+
+  1.List接口：
+	整体上相对有序存储（相对存入元素的顺序），可以存储相同的元素（不排重），可以通过下标访
+
+  2.ArrayList类：
+	相对有序存储，可以存储相同的元素，可以通过下标访问，底层通过数组实现的集合
+	使用方法：
+	add(E e)：向集合中添加元素
+	add(Collection<? extends E> c)：向集合中添加一个集合
+	clear()：清空集合中所有的元素
+	isEmpty()
+	get(int index)：通过下标访问元素
+	set(int index,E e)：修改集合中的元素
+	add(int index,E e)：向集合中插入元素
+	size()：返回集合总元素的个数
+	toArray()：将集合中的元素存入到一个对象数组中
+
+  3.ArrayList集合的遍历：
+	1）普通for循环：
+	2）增强for循环：
+		for(数据类型 中间变量:集合名){}
+
+	3）使用迭代器：
+	iterator()：获取集合的迭代器
+	listIterator()：获取集合的List独有迭代器
+
+  4.LinkedList类：
+	相对有序存储，可以存储相同的元素，可以通过下标访问，底层通过链表实现
+
+
+  5.ArrayList和LinkedList的使用环境：
+	当对集合元素的删除和插入操作较频繁时，使用LinkedList
+	当对集合元素的查询和修改操作教频繁时，使用ArrayList
+
+  6.Vector类：和ArrayList使用方法一样
+	相对有序存储，可以存储相同的元素，可以通过下标访问，底层通过数组实现的集合
+	使用方法和ArrayList完全一样
+
+  7.Stack类：栈的存储结构
+	先进后出，Vector的子类
+
+	只要使用了Stack类，就不要使用add，remove等方法
+	而只能使用push、peek、pop（search、empty）
+
+
+List集合的小总结：
+	所有的List集合都是有序存储，List集合可以存储相同的元素（使用元素的equals方法比较），可以通过下标访问元素（get(int index)方法）
+
+	遍历：可以使用循环遍历（普通循环，增强for循环）
+		可以使用迭代器遍历
+			Iterator（Collection接口中的iterator()方法）
+			ListIterator（List接口中的listIterator()方法）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
