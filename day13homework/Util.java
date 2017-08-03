@@ -6,9 +6,9 @@ public class Util {
 		if(i!=0&&j!=0) {
 			System.out.println(i*j);
 		}else if(i==0||j==0) {
-			throw new MyRuntimeException("½á¹ûÎª0");
+			throw new MyRuntimeException("ç»“æœä¸º0");
 		}else {
-			System.out.println("²»ÖªµÀ¸Ã×öÊ²Ã´");
+			System.out.println("ä¸çŸ¥é“è¯¥åšä»€ä¹ˆ");
 		}
 	}
 	
@@ -18,10 +18,10 @@ public class Util {
 				int a=Integer.parseInt(s1)+Integer.parseInt(s2);
 				System.out.println(a);
 			}else {
-				throw new MyException("×Ö·û´®²»ÄÜ±íÊ¾ÕûÊı");
+				throw new MyException("å­—ç¬¦ä¸²ä¸èƒ½è¡¨ç¤ºæ•´æ•°");
 			}
 		}else {
-			throw new MyException("×Ö·û´®²»ÄÜ±íÊ¾ÕûÊı");
+			throw new MyException("å­—ç¬¦ä¸²ä¸èƒ½è¡¨ç¤ºæ•´æ•°");
 		}
 	}
 	
@@ -31,9 +31,10 @@ public class Util {
 				||obj1 instanceof Double||obj1 instanceof String)&&(obj2 instanceof Integer||obj2 instanceof Byte||obj2 instanceof Short||obj2 instanceof Long
 						||obj2 instanceof Boolean||obj2 instanceof Character||obj2 instanceof Float
 						||obj2 instanceof Double||obj2 instanceof String)) {
+			System.out.println(obj1+obj2+"");//è¿æ¥
 			System.out.println(obj1.toString()+obj2.toString());
 		}else {
-		    throw new MyException("ÕâÁ½¸ö¶ÔÏó²»ÄÜÏÎ½Ó");
+		    throw new MyException("è¿™ä¸¤ä¸ªå¯¹è±¡ä¸èƒ½è¡”æ¥");
 		}
 	}
 }
