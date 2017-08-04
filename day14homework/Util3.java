@@ -1,67 +1,32 @@
 package day14homework;
 
 import java.util.List;
-import java.util.Scanner;
 
-//¹¤¾ßÀà,ÊµÏÖÂß¼­¹¦ÄÜ
+
+//å·¥å…·ç±»,å®ç°é€»è¾‘åŠŸèƒ½
 public class Util3 {
-	//×¢²áÉÌÆ·¹ÜÀíÔ±
-	//ÕâÁ½¸öÖ»×÷Îª¹¤¾ßÀà£¬²»ÒªĞ´Ğ©Ê²Ã´Scanner£¬Âß¼­ÉÏ¸Ğ¾õÃ»´í£¬Scanner±¨´íÁË
-	public void Register(List<GoodManager3> list) {
-		Scanner input=new Scanner(System.in); 
-		System.out.println("ÇëÊäÈëÓÃ»§Ãû:");
-		String username=input.next();
-		for(int i=0;i<list.size();){
-			if(list.get(i).getUsername().equals(username)){
-				System.out.println("ÓÃ»§ÃûÒÑ´æÔÚ!ÇëÖØĞÂÊäÈë:");
-				username=input.next();
-		         i=0;
-			}else {
-				i++;
-			}
-		}
-		GoodManager3 p=new GoodManager3();
-		p.setUsername(username);
-		System.out.println("ÇëÊäÈëÃÜÂë:");
-		p.setPassword(input.next());
-		list.add(p);
-		System.out.println("×¢²á³É¹¦!ÇëµÇÂ½");
-		input.close();
-	}
-	//ÑéÖ¤ÉÌÆ·¹ÜÀíÔ±
-	public GoodManager3 verify(List<GoodManager3> list) {
-		Scanner input=new Scanner(System.in);
-		GoodManager3 gm=new GoodManager3();
-		System.out.println("ÇëÊäÈëÓÃ»§Ãû:");
-		String username=input.next();
-		for(int i=0;i<list.size();){
-			if(list.get(i).getUsername().equals(username)){
-				gm=list.get(i);
+	//æ³¨å†Œå•†å“ç®¡ç†å‘˜
+	//è¿™ä¸¤ä¸ªåªä½œä¸ºå·¥å…·ç±»ï¼Œä¸è¦å†™äº›ä»€ä¹ˆScannerï¼Œé€»è¾‘ä¸Šæ„Ÿè§‰æ²¡é”™ï¼ŒScanneræŠ¥é”™äº†
+	public boolean Register(List<GoodManager3> list,String username) {
+		boolean boo=false;
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getUsername().equals(username)) {
+				boo=true;
 				break;
-			}else {
-				i++;
-			}
-			if(i==4) {
-				System.out.println("²»´æÔÚÕâ¸öÓÃ»§,ÖØĞÂÊäÈë:");
-				 username=input.next();
-				 i=0;
 			}
 		}
-		System.out.println("ÇëÊäÈëÃÜÂë:");
-		String password=input.next();
-		int j=0;
-		while(j<2) {
-		if(gm.getPassword().equals(password)) {
-			System.out.println("µÇÂ½³É¹¦,¿ÉÒÔ½øĞĞÔöÉ¾¸Ä²é");
-			j=2;
-		}else {
-			System.out.println("ÃÜÂë´íÎó,ÇëÖØĞÂÊäÈë:");
-			password=input.next();
+		return boo;
+	}
+	//éªŒè¯å•†å“ç®¡ç†å‘˜
+	public boolean verify(List<GoodManager3> list,String username,String password) {
+		boolean boo=false;
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getUsername().equals(username)&&list.get(i).getPassword().equals(password)) {
+				boo=true;
+				break;
+			}
 		}
-		}
-		input.close();
-		return gm;
+		return boo;
 	}
 	
-
 }
