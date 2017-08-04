@@ -1,13 +1,14 @@
 package day14homework;
 
+import java.util.ArrayList;
 import java.util.List;
 
-//ÉÌÆ·¹ÜÀíÔ±Àà,ÊµÏÖOperation3½Ó¿Ú
+//å•†å“ç®¡ç†å‘˜ç±»,å®ç°Operation3æ¥å£
 public class GoodManager3 implements Operation3{
-	//µÇÂ¼Ãû,ÃÜÂëµÈ³ÉÔ±ÊôĞÔ
+	//ç™»å½•å,å¯†ç ç­‰æˆå‘˜å±æ€§
 	public String username;
 	public String password;
-	//¹¹Ôì·½·¨Óëget/set·½·¨
+	//æ„é€ æ–¹æ³•ä¸get/setæ–¹æ³•
 	public GoodManager3() {
 		super();
 	}
@@ -40,10 +41,11 @@ public class GoodManager3 implements Operation3{
 		return "GoodManager3 [username=" + username + ", password=" + password + "]";
 	}
 
-	//ÖØĞ´Operation3½Ó¿ÚµÄ·½·¨
+	//é‡å†™Operation3æ¥å£çš„æ–¹æ³•
 	@Override
 	public void addGood(List<Good3> list, Good3 good) {
 		// TODO Auto-generated method stub
+		list.add(good);
 		
 	}
 
@@ -51,43 +53,77 @@ public class GoodManager3 implements Operation3{
 	@Override
 	public void deleteById(List<Good3> list, int id) {
 		// TODO Auto-generated method stub
-		
+		int index=0;
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getId()==id) {
+				index=i;
+			}
+		}
+		list.remove(index);
 	}
 
 	@Override
 	public void deleteByName(List<Good3> list, String name) {
 		// TODO Auto-generated method stub
-		
+		int index=0;
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getName().equals(name)) {
+				index=i;
+			}
+		}
+		list.remove(index);
 	}
 
 	@Override
 	public void setPriceByName(List<Good3> list, int sales, double newPrice) {
 		// TODO Auto-generated method stub
-		
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getSales()==sales) {
+				list.get(i).setPriceOne(newPrice);
+			}
+		}
 	}
 
 	@Override
 	public void setPriceByCost(List<Good3> list, double cost, double newPriceAll) {
 		// TODO Auto-generated method stub
-		
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getCost()==cost) {
+				list.get(i).setPriceAll(newPriceAll);
+			}
+		}
 	}
 
 	@Override
 	public List<Good3> queryByPriceOne(List<Good3> list, double priceOne) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Good3> al=new ArrayList<>();
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getPriceOne()==priceOne) {
+				al.add(list.get(i));
+			}
+		}
+		return al;
 	}
 
 	@Override
 	public List<Good3> queryByPriceAll(List<Good3> list, double priceAll) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Good3> al=new ArrayList<>();
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getPriceAll()==priceAll) {
+				al.add(list.get(i));
+			}
+		}
+		return al;
 	}
 
 	@Override
 	public void queryAll(List<Good3> list) {
 		// TODO Auto-generated method stub
-		
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i).toString());
+		}
 	}
 
 }
