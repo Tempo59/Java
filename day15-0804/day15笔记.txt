@@ -1,0 +1,157 @@
+一、默写：
+  设计一个动物类，姓名、年龄属性
+	创建3个对象添加到ArrayList集合中
+	使用迭代器将这三个动物对象遍历
+
+public class Animal{
+	private String name;
+	private int age;
+}
+
+public class Test{
+	pbulic static void main(String[]args){
+		ArrayList<Animal> list = new ArrayList<>();
+		list.add(new Animal());
+		list.add(new Animal());
+		list.add(new Animal());
+
+		//使用迭代器遍历
+		Iterator<Animal> it = list.iterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
+		}
+	}
+}
+
+二、回顾：
+  1、泛型：
+	规范和注意事项：
+	泛型不能声明静态常量
+	不能初始化数组
+	不能定义重载方法
+	public class Animal<T,E>{
+		public void fun(T t,String s){}
+		public void fun(String a,E e){}
+	}
+	使用不同的实际类型创建的泛型类对象引用不可以相互赋值
+
+  2.Collection接口
+	List接口中的实现类：
+	1）ArrayList：相对有序存储，可以存相同元素，下标访问，底层数组
+	2）LinkedList：底层链表实现
+	3）Vector：底层数组实现
+	4）Stack：栈的存储结构
+
+三、Set接口：Collection的子接口
+	相对无序存储，排重的（不可以存储相同元素），不能通过下标访问
+
+  1.HashSet类：
+	相对无序存储，排重，不可以通过下标访问，底层通过哈希表实现
+
+  2.如何排重？
+	初步猜测使用equals方法进行对象的排重。此猜想错误
+	猜测使用hashCode方法进行对象的排重。次猜测错误
+
+	HashSet集合存储元素时，是调用对象的hashCode和equals方法，双重判断对象是否相同
+	先调用hashCode方法，当要存储的对象的hashCode值与集合中每一个元素都不同时，直接存储集合，若相同时，调用对象的equals方法，查看对象是否相同，若不同则存入集合，若相同就不存入
+
+  3.Set集合的遍历：
+	1）可以使用增强for循环
+	2）迭代器：Iterator：使用集合中的iterator()方法
+
+  4.LinkedHashSet类：是HashSet的子类
+	相对有序存储（底层通过链表实现），排重，不可以下标访问
+
+  5.TreeSet类：
+	此类实现类Set接口的同时还实现了SortedSet接口
+
+	SortSet接口中的方法：
+	
+
+	相对无序存储，排重，不能通过下标访问，底层通过二叉树实现
+
+	树结构：每一个元素是一个节点，每一个节点可以旁支出多个子节点
+
+	二叉树：每一个节点最多只能有两个子节点
+
+  6.TreeSet集合元素如何重新排序
+	1）自然排序：
+	在存储元素是，TreeSet集合调用元素对象的compareTo方法比较元素的大	小，按照指定的顺序排列
+
+	compareTo方法的来源？
+	String类中有compareTo方法，只要让元素对象所属的类继承了String就能保证元素中有compareTo方法，但是String类是final不能被继承
+
+	compareTo方法的来源是来自于Comparable接口的
+
+注意：
+  若想使用TreeSet集合对元素进行自然排序就必须让元素所属的类实现Comparable接口并重写compareTo方法
+
+	compareTo方法的运算规则：
+	obj1.compareTo(obj2)
+	返回值：
+	0	obj1 == obj2
+	正数	obj1 > obj2
+	负数	obj1 < obj2
+
+	Integer	数值比较
+	Character和String：Unicode
+	Boolean	false < true
+	Date	后面的日期大
+
+	2）定制排序：
+	向TreeSet集合中添加元素时，集合自动调用元素对象的compare方法，根据指定的顺序排列元素
+
+	compare方法的来源：
+	来自于Comparator接口，使用定制排序的TreeSet集合中的元素所属的类必须实现Comparator接口，并重写compare方法
+
+	compare方法比较规则：
+	返回值：
+	0		两个对象相等
+	正数		第一个参数对象大于第二个参数对象
+	负数		第二个参数对象大于第一个参数对象
+
+  7.自然排序和定制排序是对TreeSet集合中的元素进行重新排序的方法
+	两种方法的区别：
+	实质上没有区别，都是对象TreeSet集合中的元素进行重新排序
+	由于重写compareTo和compare方法时，比较规则有我们主观定义
+
+	自然排序：实现Comparable接口，重写compareTo方法
+		创建集合对象时可以使用无参数构造方法
+
+	定制排序：实现Comparator接口，重写compare方法
+		创建集合对象时必须使用Comparator参数的构造方法
+
+Set集合小总结
+	排重，不可以通过下标访问元素
+	HashSet：相对无序，底层哈希表实现
+	LinkedHashSet：相对有序，底层链表实现
+	TreeSet：相对无序，底层二叉树实现
+
+	排重（HashSet&LinkedHashSet）
+	通过hashCode和equals方法双重判断对象是否相等
+
+	元素的排序（TreeSet集合）
+	自然排序：实现Comparable接口，重写compareTo方法
+		创建集合对象时可以使用无参数构造方法
+	定制排序：实现Comparator接口，重写compare方法
+		创建集合对象时必须使用Comparator参数的构造方法
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
