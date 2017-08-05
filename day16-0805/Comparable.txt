@@ -1,0 +1,16 @@
+关于TreeSet的自然排序
+要实现排序  TreeSet<Object>中的Object需要继承Comparable<Object>并重写compareTo(Object obj)方法
+
+treeset排序根据key.compareTo()方法排序时 
+若key.compareTo()方法的返回值为正则前后两个元素位置要发生交换 
+返回值为负则前后两个元素位置不发生交换 
+
+理解:存入的两个值，1.this  2.obj
+①this.age-obj.age  为正 代表this>obj
+需要交换           1.obj   2.this
+因为this>obj，那么是一个升序
+②obj.age-this.age  为正 代表obj>this
+需要交换           1.obj   2.this
+因为obj>this,那么是一个降序
+
+重点:compareTo返回值的正负代表的是交不交换两个对象
