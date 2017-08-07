@@ -1,0 +1,115 @@
+1.Map接口的方法
+①put(K key,V value)//向Map集合中添加一个键值对，如果K存在，修改V的值
+containsKey(Object key)//boolean类型，判断键值对有没有这个Key
+containsValue(Object value)
+equals()//两映射是否相同
+②get(Object key)//获取key所对应的value
+③keySet()//将键放到set集合中
+remove(Object key)//将key删除，value也会被回收
+size()
+
+2.HashMap实例
+public static void main(String[] args){
+ HashMap<Integer,String> map1=new HashMap<>();
+ System.out.println(map1.isEmpty());//true
+ map1.put(1,"xx");
+ map1.put(2,"xxx");
+ System.out.println(map1.get(1));//输出xx
+
+ HashMap<String,Person> map2=new HashMap<>();
+ Person p=new Person("哈哈",13);
+ map2.put("xx",p);
+ map2.put("xxx",p);
+ System.out.println(map2.get("xxx").toString());
+ map2.put("xxx",new person());
+ System.out.println(map2.get("xxx").toString());//和上面第二行的输出时不同的，p被new Person()覆盖
+ System.out.println(map2.size());//2
+ }
+
+3 Map的键(Key)排重
+同样也是使用Key对象的hashCode()和equals()方法。使用HashMap键是自定义的类，需要重写两个方法
+对于HashMap的containsKey()方法也是调用两个方法比较的
+
+4 HashMap的keySet()、values()、remove()
+  Set<Person> s=map.keySet();
+
+  Collection<String> c=map.values();//不排重，是一个list集合
+
+  map.remove(new Person("xx",12));//用两个方法比较，一样就删除
+  System.out.println(map.remove(new Person("xx",12)));//输出person对应的values值
+
+5.Map集合的遍历
+  1)get() keySet()
+    HashMap(String,Integer) map=new HashMap<>();
+    map.put("xx",1);
+    map.put("xxx",2);
+    map.put("xxxx",3);
+    Set<String> s=map.keySet();
+    Iterator<String> it=s.iterator();
+    while(it.hasNext()){
+       String str=it.next();
+       System.out.println(str+"  "+map.get(str));
+    }
+
+  2)使用entrySet，将键值对返回一个Set集合，entrySet是MapSet下的一个接口，它会把Map集合变成Set集合，用getKey()和getValues()
+    HashMap(String,Integer) map=new HashMap<>();
+    map.put("xx",1);
+    map.put("xxx",2);
+    map.put("xxxx",3);
+    Set<Map.Entry<String,Integer>> s=map.entrySet();
+    Iterator<Map.Entry<String,Integer>> it=s.iterator();
+    while(it.hasNext){
+        Map.Entry<String,Integer> m=it.next();
+        System.out.println(m.getKey()+"  "+m.getValues());
+        //另一种方式
+        System.out.println(it.next());//输出是xx=1  xxx=2  xxxx=3
+    }
+
+6.LinkedHashMap
+  相对有序，链表实现
+
+7.Hashtable
+  相对无序存储，底层哈希表实现
+  与HashMap区别:
+  1)Hashtable是线程安全的，HashMap是线程不安全的
+  2)Hashtable集合不允许null的key和null的value
+    HashMap允许集合null的key和value
+    Hashtable必须初始化
+
+8.Properties (property:内容)
+  是Hashtable的子类，是一个集合
+  这个类主要是对properties文件的解析
+
+9.TreeMap
+  实现Map接口，实现SortedMap接口
+  SortedMap的方法：
+  headMap(k toKey)//键小于toKey的所有键值对
+  tailMap(k fromKey)//键大于等于fromKey的所有键值对
+
+  TreeMap<String,Ingeter> map=new TreeMap<>();
+  map.put("x",1);
+  map.put("xx",2);
+  System.out.println(map.size());//2
+
+  TreeMap<Integer,Person> map=new TreeMap<>();
+  map.put(1,new Person());
+  map.put(2,new Person());
+  System.out.println(map.size());//2
+
+  自然排序是对键的排序
+  TreeMap<Person,Integer> map=new TreeMap<>();
+  map.put(new Person(),1);
+  map.put(new Person(),2);
+  System.out.println(map.size());//运行异常，类型转换异常，没有继承Comparable()接口，重写comparaTo()方法
+
+  定制排序
+  TreeMap<Person,Integer> map=new TreeMap<>(new Person());//Person实现了Comparator接口，并重写compare()方法,这里必须加上实现了Comparator接口的实现类
+  假设：
+  public int compare(Object o1,Object o2){
+     return o2.name.compareTo(o2.name);
+  }
+  //在put3次后，只存一次，键会被覆盖，只有一个键值对，键为第一个键，value为最后一个value
+
+10.数组可以存储任意类型
+   集合只能存储引用类型
+   Set<int>//报错，泛型只能表示类

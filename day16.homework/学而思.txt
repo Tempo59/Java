@@ -1,0 +1,46 @@
+1.TreeSet怎么实现排重的:
+要用TreeSet排序，实现Comparable<>,并重写compareTo()方法，当compareTo()方法返回值为0时，会将value值放在相同的位置上，这样达到排重效果
+
+2.使用list的迭代器倒叙遍历集合(ArrayList)
+listIterator()才有previous()方法，Iterator()没有previous()方法
+
+3.判断两个对象是否相同
+重写equals()方法，一般重写equals()方法，需要同时重写hashCode()方法，关于重写hashCode()方法
+public class Student{
+  public String name;
+  public int age;
+  public char sex;
+  }
+@override
+public int hashCode(){
+  return age+sex;//一般不返回一个指定值
+ }
+
+4.关于遍历集合并对对象进行修改操作
+  总而言之:需要new一个对象来引用，特别是迭代器，需要Good g=it.next();否则会报错，在操作一个Good对象时，next()了两次
+  1)增强for循环
+    for(Good g:set){
+       if(g.getSales()==sales){
+          Good opegood=g;
+          g.setPriceOne(newPrice);
+       }
+    }
+  2)迭代器
+    Iterator<Good> it = set.iterator();
+    while(it.hasNext()) {
+	Good good = it.next();//将迭代出的商品对象存储到good对象中
+	if(good.getSales()==sales) {//若是要修改的商品
+	  it.remove();//先删除原对象
+	  good.setPriceOne(newPrice);//将good中要修改的属性修改
+	  set.add(good);//在将修改后的good添加到集合中
+	}
+     }
+
+5.HashMap  properties
+  的entrySet()用set接收的泛型
+  Map.Entry<>和Entry<>
+  答：都一样，如果导包导的Map，那就要用Map.Entry<>,如果导包导的Map.Entry<>,那么可以用Entry<>简写
+      关键的是在用Entry<>得到的Set集合，用迭代器遍历的时候，还是要将it.next()赋值给一个新引用Entry<> e！！！
+
+6.很神奇，钱姓那个Student加不进去，原因是compareTo()这个方法，只比较了成绩，否则就返回0，那么在其他成绩一样的情况下视为和赵一样的学生，添加无效。google了一下，说compareTo相等两个对象就相等，就算equals()不等！！！
+  为了实现先判断Person是否一样，在按成绩排序，先条件判断满足对象一样的条件，一样就返回0，这样在对象一样的情况下是不会添加对象了，然后再排序
