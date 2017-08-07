@@ -1,0 +1,279 @@
+一、默写：
+  1.设计一个Animal类，有姓名属性，在主方法中将三个Animal对象添加到一个ArrayList集合中，并使用List集合的迭代器将这三个对象倒叙遍历出来
+
+listIterator()
+
+ListIterator<Animal> it = list.listIterator();
+
+previous()
+
+public class Animal{
+	private String name;
+}
+
+public class Test{
+	public static void main(String[]args){
+		ArrayList<Animal> list = new ArrayList<>();
+		list.add(new Animal("大黄"));
+		ListIterator<Animal> it = list.listIterator();
+		//循环遍历集合
+	}
+}
+
+  2.设计一个Person类，有姓名，年龄，性别属性，在主方法中将三个Person对象添加到一个HashSet集合中，若对象的所有属性值都相同则视为相同对象，不能添加到集合中，使用迭代器将集合遍历
+
+public class Person{
+	private String name;
+	private int age;
+	private char sex;
+
+	//get/set
+	//构造方法
+	//重写equals和hashCode方法
+	public int hashCode(){
+		return age + sex;
+	}
+	public boolean equals(Object o){
+		if(o instanceof Person){
+			Person p = (Person)o;
+			if(this.name.equals(p.name)				&&this.age==p.age&&this.sex==p.sex){
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
+  3.设计一个Student类，有姓名，年龄，性别，分数属性，在主方法中将三个Student对象添加到一个TreeSet集合中，使用自然排序将集合元素排序（按照分数的升序，年龄的升序，性别的降序，姓名的降序）
+
+public class Student implements Comparable<Student>{
+	//属性
+	//get/set
+	//构造方法
+	//重写compareTo方法
+	public int compareTo(Student s){
+		if(this.score!=s.score){
+			return this.score - s.score;
+		}else if(this.age!=s.age){
+			return this.age - s.age;
+		}else if(this.sex!=s.sex){
+			return s.sex - this.sex;
+		}else{
+			return s.name.compareTo(this.name);
+		}
+	}
+}
+
+二、回顾：
+  1.List集合：
+	总体上相对有序存储，可以存储相同元素，可以通过下标访问
+
+	ArrayList：底层通过数组实现的集合
+	LinkedList：底层通过链表实现
+	Vector：底层数组实现
+	Stack：栈
+
+  2.Set集合：
+	总体上相对无序存储（有特例），排重的，不可以通过下标访问元素
+
+	HashSet：底层通过哈希表实现
+	LinkedHashSet：底层通过链表实现，所以相对有序存储
+	TreeSet：底层通过二叉树实现（SortedSet）
+
+	自然排序：实现Comparable接口，重写compareTo方法
+	定制排序：实现Comparator接口，重写compare方法
+
+
+三、Map集合
+	映射性集合，所有的元素都是以键值对形式存在
+
+	什么键值对：
+		数学中的函数的自变量和因变量可以理解成一个键值对
+
+	键：key，相当于是自变量
+	值：value，相当于因变量，每一个key都有唯一的value与之对应
+
+	例：
+	int a = 5；
+	a = 6；
+
+	Map集合键值对的特点：
+	键是排重的，但是值可以重复，总体上元素排重
+	一个键key只有一个对应值value，若向Map集合中添加相同key的键值对，		新的value将旧的value覆盖
+	
+  1.Map接口中的方法：
+	put(K key,V value)：向map集合中添加一个键值对
+		修改键值对的值
+	get(Object key)：获取key所对应的value
+	Map集合可以通过key找到对应的value（使用get方法）
+	keySet()：将键值对中所有的key放进一个Set集合中返回
+	size()：返回键值对的个数
+
+  2.HashMap类：是Map接口的实现类
+	键排重，值不排重，总体元素排重，不可以存储相同的键值对
+	底层通过哈希表实现
+
+	对于Map集合中键的排重方法和Set集合一样，也是通过hashCode和equals方法双重判断
+
+
+  3.Map集合的遍历：
+	1）通过key获取对应的value
+		get方法和keySet方法
+	先获取map集合的所有的key（使用keySet方法），遍历所有的key，通过每次遍历的key获取对应的value
+
+	2）使用entrySet方法：
+	将一个map集合中的键值对转换成一个Set集合，使用迭代器遍历Set集合
+
+  4.LinkedHashMap类：
+	是HashMap的子类，键排重，值不排重，整体元素排重，不可以存储相同元素，底层通过链表实现（相对有序）
+
+  5.Hashtable类：是Map接口的实现类
+	相对无序存储，底层通过哈希表实现
+
+	此类中的方法和HashMap完全一样
+
+  6.HashMap和Hashtable的区别：
+	1）Hashtable类中的方法都是线程安全的，HashMap中的方法都是不安全
+	2）Hashtable集合不允许存在null的key和null的value
+		HashMap集合允许存在null的可以和value
+
+	也就是说Hashtable集合中的元素的键和值必须初始化
+
+  7.Properties类：
+	是Hashtable的子类
+
+	此类主要是对properties文件的解析：通过流解析
+
+  8.TreeMap：
+	实现了Map接口同时也实现了SortedMap接口
+
+	SortedMap接口中的方法：
+	firstKey()：获取集合中的第一个键值对的键key
+	lastKey()：获取集合中最后一个键值对的键
+	headMap(K toKey)：获取所有键值对中键小于toKey的键值对
+	tailMap(K fromKey)：获取所有键值对中键大于等于fromKey的键值对
+
+  存储特点：键排重，值不排重，整体元素排重，底层通过二叉树实现，相对无序
+
+	TreeMap集合中元素的重新排序分为两种方法：
+	自然排序：对键进行自然排序，元素中键所属的类必须实现Comparable接		口，重写compareTo方法
+		TreeMap集合添加元素时，由集合调用元素键对象的compareTo方法，按照指定的顺序将元素排序
+
+	定制排序：对键进行定制排序，元素中键所属的类必须实现Comparator接		口，重写compare方法
+		由集合调用元素键对象的compare方法，按照指定的顺序排序
+
+
+	注意：对元素键值对的重新排序就是对键的重新排序，和值没有关系
+
+四、集合总结：
+	Collection线性集合、Map映射性集合
+
+	List集合、Set集合（是Collection的子接口）
+
+	List：总体相对有序存储，不排重，下标访问
+
+	Set：总体上相对无序存储，排重，不能下标访问
+
+	Map：总体上相对无序存储，键排重，值不排重，整体元素排重，可以通过key快速的找到对应的value（使用get方法）
+
+	int a = 1；
+	a = 2;
+	int b = 4;
+	int c = 4;
+
+  1.底层实现：
+	数组：ArrayList、Vector
+	链表：所有以Linked开头的都是链表
+		LinkedList、LinkedHashSet、LinkedHashMap
+	哈希表：所有以Hash开头的都是哈希表
+		HashSet、HashMap、Hashtable
+	二叉树：所有以Tree开头的都是二叉树
+		TreeSet		TreeMap
+		SortedSet	SortedMap
+
+  2.是否排重：
+	元素排重：Set集合都排重
+		HashSet、LinkedHashSet、TreeSet
+		Map集合整体元素排重
+		
+	键排重：Map集合都键排重
+
+	不排重：List集合不排重
+
+  3.相对顺序：
+	相对有序：
+	List集合都是相对有序的，所有底层链表实现的都相对有序
+		ArrayList、LinkedList、Vector、Stack
+		LinkedHashSet
+		LinkedHashMap
+
+	相对无序：除Linked开头的Set和Map集合都是相对无序的
+
+  4.遍历方式：
+	可以使用普通循环的：List集合
+
+	增强for循环：注意.使用增强for循环无法实现对元素进行修改操作
+
+	ListIterator迭代器：可以反向遍历
+	只有List集合可以使用，此迭代器是List集合的独有的迭代器
+	ListIterator是Iterator的子接口
+
+	Iterator迭代器：所有的Collection集合都可以使用此迭代器遍历
+		List和Set集合
+
+	Map集合如何遍历：
+		将Map集合转换成Collection集合进行遍历
+	1）遍历所有的键：
+		使用keySet方法
+	2）遍历所有的值：
+		使用values方法
+	3）遍历键值对：
+	  i.keySet方法和get方法配合使用
+		先获取所有的键，通过遍历所有键的集合同时获取每一个键锁对		应的值
+	  ii.entrySet方法：使用到Map接口中的内部静态接口Map.Entry<K,V>
+		将Map集合中的键值对转换成一个Set集合
+		遍历这个键值对数据所组成的Set集合
+
+五、Collections工具类：
+	此类中提供了一组方法，这些方法是对集合进行操作的方法
+
+	注意：
+	java.util.Collection是接口
+	java.util.Collections是工具类
+
+六、集合和数组的异同：
+	集合和数组都是数据的容器，可以同时存储多个数据
+
+	不同点：
+	1）长度：
+		数组定长，一旦确定长度，就不可改变；
+		集合不定长，可以无限的添加元素
+	2）长度：
+		数组的长度是length属性
+		集合的长度是size()方法
+	注意：字符串中length是方法
+
+
+	3）遍历方法：
+		数组只能使用循环
+		集合既可以使用循环还可以使用迭代器
+	4）元素类型：
+		数组可以存储任意类型，只要保证类型相同（相兼容）
+		集合只能存储引用类型，泛型只能表示类
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
