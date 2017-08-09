@@ -1,0 +1,35 @@
+1.Student compareTo()
+在执行map.put(s,s.getScoreAll());//学生作为键，总分作为值
+添加时是键排重，判断到两个对象一样时，s不变，但是在计算values时，s代表的是现在这个对象，s.getScoreAll()获取的是现在这个对象的总分
+相当于x一样y重新赋值
+
+解决方式：在map.put()操作前，判断键是否存在
+if(map.contains(s)),不存在才执行map.put()操作
+
+2.File类     java.io.File
+  对磁盘文件的操作，是对磁盘路径的封装
+  属性:
+  File.pathSeparator//路径分隔符(随系统)  ;
+  File.pathSeparatorChar//  ;
+  File.separator//名称分隔符(随系统)   \
+  File.separatorChar//   \
+  构造方法:
+  File(String pathname)
+  File(URI uri)
+  成员方法:
+  1)canExecute()//文件存不存在
+  File f=new File("D:\\hello.txt");//这算声明
+  f.canExecute();//false
+
+  File.createNewFile()//只能创建文件，不能创建文件夹
+  File.mkdir()//只能创建文件夹
+  new File("D:\\hello\\a\\b\\c")//false,a，b，c不存在
+  File.mkdirs()//可以实现上面的的情况
+  File.isDirectory()//判断是否为目录
+  File.delete()//只能删除文件或空目录
+  File.getName()//获取文件名称
+  File.list()//String名称数组
+  File.listFiles()//File抽象路径
+  File.renameTo(File f)//可以改变名称或者路径
+
+3.多用字节流，字节流可以操作任意文件，字符流只能操作文本文件

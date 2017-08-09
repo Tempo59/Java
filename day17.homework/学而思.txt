@@ -1,0 +1,9 @@
+1.？？？
+map.put(s,scoreAll);
+map.size();//1
+map.get(s);//null  ？？？
+
+2.fos=new FileOutputStream(f1,true);//追加，不写就是覆盖写
+
+3.File f=new File("D:\\test");
+  File[] file=f.listFiles();//当f为空目录时，file返回null
