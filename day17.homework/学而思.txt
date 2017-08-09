@@ -1,9 +1,9 @@
-1.������
-map.put(s,scoreAll);
-map.size();//1
-map.get(s);//null  ������
+1.map.put(s,scoreAll);
+  map.size();//1
+  map.get(s);//null
+  解答：因为map里面存的都是键值对，通过key可以找到value，首先get方法是遍历key集合，看集合中是否存有现在的s，那它是怎么判断现在的s和集合中的某个key相等的喃？还是compareTo方法，这个方法必须有返回0的情况，因为不仅为了排重，在通过map.get(Key k)时会通过compareTo方法判断实参k是否存在k集合中，在的话，才能返回value值
 
-2.fos=new FileOutputStream(f1,true);//׷�ӣ���д���Ǹ���д
+2.fos=new FileOutputStream(f1,true);//追加，不写就是覆盖写
 
 3.File f=new File("D:\\test");
-  File[] file=f.listFiles();//��fΪ��Ŀ¼ʱ��file����null
+  File[] file=f.listFiles();//当f为空目录时，file返回null
