@@ -1,0 +1,67 @@
+1.Thread
+  1)jdk对线程进行了封装
+  实现线程：自定义线程类继承Thread类
+
+  2)run方法是线程的功能，启动线程不是调用run方法，用  3)start方法
+  start启动线程，虚拟机自动调用run方法
+
+  4)线程抢占式执行，可能执行了一会就被抢了时间片，只能挂起等待
+
+  5)System.out.println(Thread.currentThread().getName());//main，返回当前线程
+
+  Thread.currentThread().setName("瓜娃子");
+  System.out.println(Thread.currentThread().getName());//瓜娃子
+  
+  6)优先级：
+    getPriority()//返回优先级。默认优先级是5，优先级最小为1，优先级最大为10，线程的优先级不代表执行顺序，优先级能代表线程先执行的概率，越大的在多次执行的情况越多的先执行
+
+  7)sleep(long millis)
+    需要处理异常。为什么不能上抛？因为在run方法中的sleep(),run方法是重写的，上抛的话就不再是重写方法了，和原方法签名不一样了
+
+  8).join()//等待线程执行，该线程加入队伍，先执行完毕
+
+  9).isDaemon()//boolean，守护线程，是谁的守护线程，谁停了，守护线程也停
+    .setDaemon(boolean b)//true表明他是后台线程
+
+  10)yield()//线程让步，就停那么一下
+
+  11)构造方法：
+     Thread(String name)
+
+2.实现Runnable接口
+  1)xx implements Runnable{}//xx实现Runable接口，只需重写run方法
+  需要Thread的构造方法把它封装成线程
+  xx x=new xx();
+  Thread t=new Thread(x);
+  t.start();
+  可以用匿名内部类实现：
+  Runable r=new Runnable(){
+      @override
+      public void run(){
+         System.out.println("线程1");
+      }
+  };
+  Thread t=new Thread(r);
+  2)比较Thread和Runnable两种方式
+    Thread直观，可扩展性差(类是单继承的)
+    Runnable不直观，扩展性强
+    建议使用Runnable
+
+3.线程同步(资源共享)
+  三个窗口卖50张票
+  线程安全问题：所有线程都在操作临界资源，当操作完临界资源后没有提交，另一个线程又开始操作临界资源，此时临界资源就会出现问题
+  解决方式：将临界资源锁定在正在操作的资源上
+  关键字：synchronized
+  锁:对象锁和类锁
+  对象锁的方式：
+  1)同步代码块
+    语法：
+    synchronized(锁){
+           //对临界资源的操作代码
+    }
+    synchronized(new String()){}//锁出错，要保证所有的锁是同一个对象
+  2)同步方法
+    public synchronized void fun(){}
+  3)同步锁：ReenTrantLock类
+    lock()//上锁
+    unlock()//解锁
