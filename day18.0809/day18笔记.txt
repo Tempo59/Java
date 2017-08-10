@@ -1,0 +1,179 @@
+一、默写
+  设计一个Person类，有姓名，年龄，性别属性，重写toString方法
+	格式：
+	张三,12,男
+
+	在主方法中创建一个Person类的对象，将这个对象的信息写入到D:\\info.txt中
+	再将这个字符串从文件中读取出来，封装到一个Person对象中
+
+public class Person{
+	private String name;
+	private int age;
+	private char sex;
+	public String toString(){
+		return this.name+","+this.age+","+this.sex;
+	}
+}
+
+public class Test{
+	public static void main(String[]args){
+		Person p = new Person("张三", 12, '男');
+		File file = new File("d:\\info.txt");
+
+		//将Person对象信息写入文件
+		FileWriter fw = null;
+		try{
+			fw = new FileWrite(file);
+			fw.write(p.toString());
+		}catch(IOException e){
+			//。。。。。
+		} finally {
+			if(fw!=null){
+				try{
+					fw.flush();
+					fw.close();
+				}catch(IOException e){
+					//
+				}
+			}
+		}
+		//从文件中读取信息
+		FileReader fr = null;
+		StringBuffer sb = new StringBuffer();
+		try{
+			fr = new FileReader(file);
+			int i = -1;
+			while((i=fr.read())!=-1){
+				sb.append((char)i);
+			}
+		}catch(IOException e){
+			//
+		}finally{
+			//关闭流
+		}
+		String str = sb.toString();
+		String[] s = str.split("[,]");
+		Person p1 = new Person(s[0], Integer.parseInt(s[1]), s[2].charAt(0));
+		System.out.println(p1);
+	}
+}
+
+二、回顾：
+  1.File类：
+	createNewFile：创建一个新的空文件
+	mkdir/mkdirs：创建文件夹
+	isFile/isDirector：判断File对象是文件还是目录
+	delete：只能删除文件和空文件夹
+	renameTo：只对文件的名称或抽象路径修改，文件内容不影响
+
+  2.FileInputStream：文件字节输入流，从磁盘中向java程序传输数据
+	FileOutputStream：文件字节输出流
+	FileReader：文件字符输入流
+	FileWriter：文件字符输出流
+
+	注意：使用输出流时，由于主动权在java程序，所以在关闭流之前需要刷新流（flush方法）
+
+	read、write、flush、close
+
+三、缓冲流：
+  1.什么时缓冲流：
+	带有缓冲区流，在使用流传输数据时，流直接对缓冲区中的数据进行操作，缓冲区中的数据自动的迭代
+	当被操作的文件数据量过大时，使用缓冲流可以适当的提高效率
+
+  2.缓冲字节流：
+	缓冲字节输出流：BufferedOutputStream
+
+	缓冲字节输出流是通过底层的字节流决定的追加写入还是覆盖写入
+
+	使用输出流的覆盖写入时，实际上是在创建流对象时就已经把文件中原有的数据删除了
+
+	缓冲字节输入流：BufferedInputStream
+
+	newLine和readLine两个方法	
+
+  3.缓冲字符流：
+	缓冲字符输出：BufferedWriter
+
+	缓冲字符输入：BufferedReader
+
+	案例：设计一个Student类，有姓名，年龄，性别，分数属性
+	在主方法中创建3个Student对象，将这三个对象的信息写入到
+		stuInfo.txt文件中
+	要求一个学生的信息占一行
+
+	最后再将三个学生信息读取出来
+
+四、转换流：
+  1.输入转换流：InputStreamReader字节流通向字符流的桥梁
+	输入流用于读取数据使用，所以java程序读取到的数据是字符数据
+
+	是将字节流转换成字符流使用
+
+  2.转换输出流：OutputStreamWriter字符流通向字节流的桥梁
+	将字节流转换成字符流使用
+
+  3.为何出现转换流：
+	1）由于字节流应用广泛，而字符流速度块
+	2）编码问题
+		中文编码：gbk，gb-2312
+		通用编码：utf-8
+		西文字符：iso-8859-1
+	转换流可以指定编码格式读取文件
+
+五、对象流：
+  1.什么是对象流：
+	将数据以对象的形式固化到磁盘，或从磁盘中将数据以对象的形式读取出来
+
+  2.序列化：
+	将数据以对象的像是写入到磁盘文件，这个过程叫做序列化
+	使用对象输出流：ObjectOutputStream类
+
+  3.反序列化：
+	将数据以对象的形式从磁盘文件中读取到java程序中
+	使用对象输入流：ObjectInputStream类
+
+  4.Serializable接口：
+	所有需要序列化的对象所属的类必须实现这个接口
+	标志性接口：所有实现类此接口的类，被标识可以被序列化
+
+  5.序列化注意事项：
+	1）序列化的对象所属的类中必须有可以访问的无参构造方法
+	2）一旦对象序列化，类就不能做任何修改
+
+	序列版本号是一个长整形的静态常量属性
+
+
+	在多个工程中需要使用相同类的序列化对象，在不同功能中具有相同的包结构，类中的序列版本号必须相同
+
+  思考：如何序列化多个对象
+	将多个对象放进一个集合中，然后将集合对象序列化（数组也可以）
+
+	练习：设计一个注册的过程，（用户类：用户名、密码）
+		没注册一个用户将这个用户信息序列化到UersInfo.txt中
+
+		若用户名相同则不可以注册
+		
+		设计一个登陆过程：先输入用户名，判断用户名是否存在，若不存在提示不存在，若存在输入密码，若密码正确，显示登陆成功，否则显示密码错误
+
+六、Properties
+	properties文件的解析
+	load
+	store
+
+
+
+七、补充关键字：
+	transient关键字
+	被这个关键字修饰的属性不可以序列化
+
+
+
+
+
+
+
+
+
+
+
+
