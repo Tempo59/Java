@@ -1,0 +1,48 @@
+1.缓冲流
+  带有缓冲区的流，流操作的是缓冲区中的数据，缓冲区的数据自动的迭代
+  当被操作的文件数据量过大时，使用缓冲流可以提高效率
+  1)缓冲字节输出流
+    BufferedOutputStream
+    bos=new BufferedOutputStream(new FileOutputStream(file,true));//在new一个流的时候，如果不是选择true(追加数据)，文件会先被置空，然后写入
+    
+    .nextLine()//换行，输出流用
+    .readLine()//读取下一行，输入流用
+
+2.转换流
+  1)InputStreamReader
+    字节转字符输入流//java程序接收的字节
+    将字节流转换为字符流使用
+  isr=new InputStreamReader(new FileInputStream(file),"gbk");
+  2)OutputStreamWriter
+    字符流转字节流输出流//java程序传的是字符
+    将字节流转换为字符流使用
+ 
+    只有转换流能指定编码方式操作！解决编码问题
+
+3.对象流
+  将数据以对象的形式固定到磁盘，或从磁盘以对象的形式读取出来
+  序列化：将数据写入磁盘
+  ObjectOutputStream
+  反序列化:将数据从磁盘读出
+  ObjectInputStream
+  .writeObject(Object o)//
+  .readObject()//
+  Serializable:标志性接口，所有要序列化的对象必须实现的接口
+  
+  序列化的对象注意事项：
+  1)对象必须有无参构造方法
+  2)不能有泛型
+
+  //序列版本号
+  private static final long serialVersionUID = 1L;
+	
+  怎么实现序列化多个对象？
+  将对象存入集合，序列化集合对象
+
+4.Properties
+  .load()//得到键值对
+  .store()//存进去
+  p.store(new FileOutputStream(f),"用户--密码");//后面是注释部分
+
+5.补充关键字
+  transient(暂时)，属性被这个修饰，不能被序列化

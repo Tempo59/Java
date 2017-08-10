@@ -1,0 +1,25 @@
+1.对象信息存在userinfo.txt中，实现注册(用户名不能重复)和登陆过程，用集合序列化，反序列化对象来实现
+  Q1:注册的时候，怎么读出对象集合？还有txt可能是空的嘛？报EOFException异常了
+  A1：通过file.length==0判断txt是否为空，不为空，Set<user> s=Set<user>ois.readObject();读取集合对象
+
+  测试：
+  Hello.txt
+  //haha
+
+  File f=new File("Hello.txt");
+  System.out.print(f.length());//4
+  返回的是这个目录的文件数或者文件的字符长度 
+
+2.关于ObjectOutputStream和ObjectInputStream两个对象流，用oos的writeObject时，写入的哪种Object，读出的也是哪种Object，例如写出的是Student，读的时候想要转为ArrayList<Student>是不行的
+
+3.问题描述：在向一个文件写入可序列化对象时，每次只想向文件的末尾添加一个可序列化的对象，于是使用了FileOutputStream（文件名，true）间接的构建了ObjectOutputStream流对象，在向外读数据的时候第一次运行的时候不会报错，在第二次就会报java.io.StreamCorruptedException: invalid type code: AC错误。
+
+原因：在一个文件都有一个文件的头部和文件体。由于对多次使用FileOutputStream（文件名，true）构建的ObjectOutputStream对象向同一个文件写数据，在每次些数据的时候他都会向这个文件末尾先写入header在写入你要写的对象数据，在读取的时候遇到这个在文件体中的header就会报错。导致读出时，出现streamcorrput异常。
+
+解决办法：所以这里要判断是不是第一次写文件，若是则写入头部，否则不写入。
+
+4.(o=ois.readObject())!=null
+关于报EOFException异常
+读取只能读取一个对象，用上面的方式多读的话肯定会报EOF，可以try catch处理的时候做处理，或者把要读的对象封装好到一个集合中，读取一次
+
+5.在进行对象流的读入与写入的时候，最好把他们封装好，每次整体存取
