@@ -1,0 +1,198 @@
+一、默写：
+  1.基本数据类型（10）
+
+  2.final关键字用法（5）
+
+  3.static关键字用法（5）
+
+  4.continue、break关键字用法（20）
+
+  5.继承接口的关键字extends，抽象的关键字abstract，实现接口的关键字implements，序列化接口Serializable，声明接口关键字interface，声明枚举的关键字enum，同步关键字synchronized（20）
+
+  6.元素排重的集合有哪些？
+
+  7.TreeSet集合对元素进行重新排序的方法有哪些，相关接口有哪些（5）
+	自然排序：Comparable接口
+	定制排序：Comparator接口
+
+  8.线程的声明周期（5）
+	新建态，就绪态，运行态，挂起态，消亡态
+
+二、回顾：
+  1.线程安全：
+	由于临界资源可以被所有线程访问，此时会出现线程安全问题
+
+  2.如何解决线程安全：
+	将临界资源锁定在正在操作的线程上
+
+	1）同步代码块：需要使用锁对象（对象锁，类锁）
+	2）同步方法：
+	3）同步锁：
+
+  3.使得线程挂起的方法：
+	1）Thread类中sleep方法：将正在执行的线程休眠指定时间
+	2）Object类中的wait方法，将正在执行的线程挂起
+		需要使用notify方法或notifyAll方法将线程唤醒
+
+  4.生产者消费者模式:
+	仓库存储产品，判断条件
+	使用锁对象将线程挂起，同时需要将对立线程唤醒
+
+三、反射：
+  1.什么是反射：
+	java中在一个正在执行的程序中，动态的获取某个类的内部信息的机制，通过动态获取的内部信息来创建对象调用方法，完成功能的过程叫做反射
+
+  2.字节码文件：
+	设计一个类编译成功后会产生字节码文件（.class）
+	在一个java文件中若有多个class，编译后产生多个字节码
+
+	可以理解成一个字节码文件就是一个类
+
+	反射就是获取字节码（类），通过获取的类创建对象完成
+
+  3.反射的优缺点：
+	1）优点：灵活性强
+	2）缺点：扩展性较差，内部的逻辑代码无法查看
+
+  4.有关反射的类：
+	java.lang.Class类:
+	对java中的类进行抽象产生的一个类，此类中提供了获取属性，成员方法和构造方法的方法
+
+	没有构造方法，所以不能创建对象
+
+	如何获取Class类对象：
+	1）Class类中的forName方法
+		Class cls = Class.forName(类名);
+
+	注意：类名包括包名和类名
+
+	2）所有类都具有一个属性：class属性
+		现有Person.java，编译后会产Person.class
+		Class cls = Person.class;
+
+	3）Object类中的getClass方法
+		Class cls = new Person().getClass();
+
+	注意：用任何方法获取到的同一个类的Class对象都是同一个对象
+
+	如何使用Class对象创建Class对象表示的类的对象：
+	使用Class类中的newInstance方法创建对象，相当于是调用Class对象表		示的类的无参数构造方法创建了一个对象
+
+
+四、有关反射的其他类：
+	java.lang.reflect包中
+	Constructor
+	Field
+	Method
+	Modifier
+	Proxy
+
+  1.Constructor类：
+	对类中构造方法进行抽象产生的类，提供了对构造方法的调用的方法
+
+	如何获取一个Constructor对象：
+	需要使用Class类中的方法：
+	getConstructor(Class<?>...c)：获取指定的共有构造方法
+	getConstructors()：获取所有共有构造方法
+	//非共有构造方法如何获取
+	getDelaredConstructor(Class<?>...c)：获取指定的构造方法
+	设置私有方法可见：
+		setAccessible方法：参数为true时，表示调用方法时前置跳过访问权限，参数为false时，表示调用方法时需要查看访问权限
+
+	getDeclaredConstructors()：获取所有的构造方法
+
+  2.Field类：
+	此类是对类中的属性进行抽象产生的类，提供了一组对属性值操作的方法
+
+	没有构造方法，所以不能创建此类对象
+
+	如何得到一个Field类的对象：
+	通过Class对象调用方法：
+	getField(Stirng name)：获取指定的共有属性（通过属性名指定）
+	getFields()：获取所有的共有属性
+	getDeclaredField(Stirng name)：获取已经声明过的属性
+	getDeclaredFields()：获取所有已经声明过的属性
+
+	获取某个对象的指定属性的值：
+	使用Field类中的get方法
+		Object get(Object obj)
+		获取obj对象的指定属性的值
+	修改某个对象的指定属性的值：
+	使用Field类中的set方法：
+		void set(Object obj, Object value)
+		将obj对象的指定属性值修改为value
+
+	setAccessible()
+
+  3.Method类：
+	此类是对类中的成员方法进行抽象产生的类，提供了对方法操作和如何执行的方法
+
+	如何获取一个Method对象:
+	通过Class对象获取：
+	getMethod(String name, Class<?>...c)：获取指定的共有成员方法
+	getMethods()：获取所有的共有成员方法
+	getDeclaredMethod(String name,Class<?>...c)：获取指定的成员方法
+	getDeclaredMethods()：获取所有的成员方法
+
+	getMethods方法获取所有的共有成员方法，包括从父类继承来的方法（即使在类中没有重写）
+	getDeclaredMethods方法获取所有的成员方法，不包括从父类中继承的方法（但是包括重写的方法）
+
+	如何执行某个成员方法：
+	Method类中的invoke方法
+	Class cls = Class.forName("method.Person");
+	Person p = (Person) cls.newInstance();	
+	Method m1 = cls.getMethod("fun", int.class, int.class);	
+	System.out.println(m1.invoke(p, 12, 12));
+	相当于调用了p对象的m1所表示的方法，将12和12两个参数传到方法中
+
+	setAccessible方法
+
+  4.Modifier类：
+	对类成员访问权限以及修饰符进行的描述
+
+五、代理模式：
+  1.什么是代理：
+	被代理人将要完成的事情委托给代理人完成，完成功能的同时添加其他的
+业务
+
+	出租房子：
+	被代理人：房东，把房子租出去
+	代理人：中介
+	中介帮助房东出租房屋添加的业务是收取中介费
+
+  2.代理的分类：
+	1）静态代理：基于类的代理
+		缺点：一个代理对象只能代理一个被代理对象，造成资源浪费，代理对象过多
+
+	2）动态代理：基于接口的代理：
+		一个代理对象代理多个被代理对象
+
+  3.动态代理的实现过程：
+	1）设计一个接口（被代理对象所要完成的功能），设计被代理类实现接口
+	2）设计代理类：
+		i.实现java.lang.reflect.InvocationHandler接口
+		ii.添加被代理对象作为属性
+		iii.重写invoke方法，在方法中调用代理对象的功能方法，在调用方法前后可以添加其他业务
+	3）在程序执行过程中，达成代理对象和被代理对象的代理协议
+	调用Proxy类中的newProxyInstance方法，将返回值赋给被代理引用
+
+	作业：代购
+	被代理对象：买东西
+	代理对象：在买东西之前要向一个文件中记录信息
+		买完之后继续向文件中记录信息
+
+	例如：张三要买自行车
+		买之前向文件中记录信息：张三要买自行车
+		买之后项文件中记录信息：张三的自行车已提货
+
+
+
+
+
+
+
+
+
+
+
+
