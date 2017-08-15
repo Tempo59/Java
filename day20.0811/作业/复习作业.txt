@@ -1,0 +1,82 @@
+1.基础概念
+
+2.流程控制
+
+3.面型对象的特征
+	产生类
+	封装
+	继承
+	多态
+	方法重载
+	方法重写
+	抽象类
+	接口
+	内部类
+
+4.集合复习：
+	Collection接口
+	Map接口
+	Comparable接口
+	Comparator接口
+	List接口
+	Set接口
+
+	ArrayList类
+	LinkedList类
+	Vector
+	Stack
+	HashSet
+	LinkedHashSet
+	TreeSet
+	HashMap
+	LinkedHashMap
+	Hashtable
+	Properties
+	TreeMap
+
+	底层实现、相对顺序、是否排重
+
+	如何排重，如何排序
+
+5.IO流
+	字节流
+	字符流
+	转换流
+	缓冲流
+	对象流
+
+	抽象类
+	InputStream
+	OutputStream
+	Reader
+	Writer
+
+	FileInputStream
+	FileOutputStream
+	FileReader
+	FileWriter
+	InputStreamReader
+	OutputStreamWriter
+	BufferedInputStream
+	BufferedOutputStream
+	BufferedReader
+	BufferedWriter
+	ObjectInputStream
+	ObjectOutputStream
+
+	Serializable接口
+
+6.多线程：
+	线程生命周期
+	线程的实现方式
+	线程安全问题解决方法
+	线程中常用的方法
+
+
+
+
+
+
+
+
+
