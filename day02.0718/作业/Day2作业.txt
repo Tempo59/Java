@@ -1,0 +1,109 @@
+初级：
+
+下列代码的输出结果是？
+int a = 10; 
+System.out.println(a++); 10   
+System.out.println(++a); 12
+System.out.println(a--); 12
+System.out.println(--a); 10
+
+答案：10
+
+下列代码的输出结果是？
+System.out.println("hello" + "world");   
+helloworld		
+System.out.println(98 + 12);    
+110		
+System.out.println(13 + "" + 14);  
+1314		 
+System.out.println(14 + 'A' + 12); 
+91
+
+改错题
+1.byte b1 = 1 , b2 = 2 ,b3 = 129; （byte为1字节八位数据，取值范围为-128-127） 
+
+2.j = j + 10; 没有定义j的数据类型  
+
+3.int i = 5; i = i * 0.5;　　（0.5为double型数据，i为int）
+
+编程题：
+
+1.求长方形的周长和面积.长为1.5宽为4
+public class Cs{
+           public static viod main(String[] args){
+           double a=1.5;
+           int b=4;
+           double l=2*a+2*b;
+           double s=a*b;
+           System.out.println(l);
+           System.out.println(s);
+}
+}
+
+2.一辆汽车以40km/h的速度行驶,行驶了45678.9km,求所用的时间
+public class{
+       public static void main(String[] args){
+       int a=40;
+       double b=45678.9;
+       double c=a/b;
+       System.out.println(c);
+}
+}
+3.定字符变量赋值为 'A'--> 输出 'a' 
+public class{
+        public static void main(String[] args){
+        char a='A';
+        char b=(char)(a+32);
+        System.out.println(b);
+}
+}
+
+
+中级：
+
+编程题
+
+1.定义三个整数，通过三目运算符，获取最小值
+import java.util.Scanner;
+class Y 
+{
+	public static void main(String[] args) 
+	{
+	    Scanner input=new Scanner(System.in);
+		int a=input.nextInt();
+		int b=input.nextInt();
+		int c=input.nextInt();
+		int d=a>b?a:b;
+		int e=d>c?d:c;
+        System.out.println(e);
+	}
+}
+
+		
+
+计算题
+
+每一题都是初始化 a = 3, b = 4;
+
+计算下面表达式，求结果值，并计算出最后的a,b值
+1.(a++)/3+(--b)*2-(a--)%6+(b++)*3-(b--)  =12 
+
+2.(++b)*2-(a--)%4+(a++)*5-(--b)/2+(--a)
+=23
+3.(a--)*6+(b++)/3-(--a)*2-(--b)*2+(++a)=13
+
+
+
+判断真假，并计算a,b的值
+1. a>b&(a++)>b&(--b)<a&(b++)>(a--)  
+
+2. b<=a|(b--)>(--a)|(++b)!=(a++)|(b--)==(a--)
+真  a=2  b=5
+3.a>b&&(a++)>b&&(- -b)<a&&(b++)>(a--)
+假  a=3；b=4
+4. b<=a||(b- -)>(- -a)||(++b)!=(a++)||(b- -)==(a- -)  
+ 真  a=3；b=4
+
+
+
+
