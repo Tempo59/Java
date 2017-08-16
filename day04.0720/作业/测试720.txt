@@ -1,0 +1,64 @@
+1.设计程序，将整形数组中每个元素向前错一位，第一个元素放到最后一个位置
+	例：int a = {1,2,3,4,5};
+	执行后遍历数组元素顺序是：2,3,4,5,1
+
+public static void main(String[]args){
+	int a = {1,2,3,4,5};
+	int temp = a[0];
+	for(int i=0; i<a.length-1; i++){
+		a[i] = a[i+1];
+	}
+	//2,3,4,5,5
+	a[a.length-1] = temp;
+}
+
+
+2.设计程序，将一个整形数组中的偶数元素取出来，放进一个新的数组中
+	例：int[] a = {1,2,3,4,5,6,7,8,9};
+	将a中所有的偶数元素取出来放进新数组int[] b ={2,4,6,8};
+public static void main(String[]args){
+	int[] a = {1,2,3,4,5,6,7,8,9};
+	int count = 0;
+	for(int i:a){
+		if(i%2==0){
+			count++;
+		}
+	}
+	int[] b = new int[count];
+	//定义一个变量从0开始，表示b数组的下标
+	int index = 0;
+	for(int i:a){
+		if(i%2==0){
+			b[index] = i;
+			index++;
+		}
+	}
+}
+
+3.设计程序，计算一个整形数组中的所有元素的和，所有奇数元素的和，所有偶素元素的和，并将结果打印在控制台
+
+public static void main(String[] args){
+	//初始化一个数组
+	int sum = 0,sumO = 0, sumJ = 0;
+	for(int i:arr){
+		sum+=i;
+		if(i%2==0){
+			sumO += i;
+		}else{
+			sumJ += i;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

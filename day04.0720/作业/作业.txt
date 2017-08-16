@@ -1,0 +1,166 @@
+1.获取某个数组中的最小值
+class Dome1 
+{
+	public static void main(String[] args) 
+	{   int []a={1,2,35,7,8,32,42,0};
+	    for (int i=0;i<a.length ;i++ )
+	    {
+			for (int j=i+1 ;j<a.length;j++ )
+			{
+				if (a[i]>a[j])
+			       {
+					int temp=a[i];
+					a[i]=a[j];
+					a[j]=temp;
+				}
+			}
+	    }
+		System.out.println(a[0]);
+	}
+}
+2.定义一个数组,数组成员10个,找出数组中最大数连同下标一起输出
+class  Dome2
+{
+	public static void main(String[] args) 
+	{    
+		int []a={12,34,5,6,32,23,21,1,2,3,};
+		int s=0;
+		for (int i=0;i<a.length ;i++ )
+		{
+			if (s<a[i])
+			{
+				s=a[i];
+			}
+		}
+		for (int i=0;i<a.length;i++)
+		{
+			if (a[i]==s)
+			{
+				int c=i;
+             System.out.println(s);
+			 System.out.println(c);
+			}
+		}
+		
+	}
+}
+
+
+3.给定一个整型数组，数组成员10个,求该数组中第二大的数的下标
+class FF 
+{
+	public static void main(String[] args) 
+	{
+        int []a={12,45,7,8,89,1,23,3,3,2};
+         int max=a[0],max2=a[1];
+		 for (int i=0;i<a.length ;i++ )
+		 {
+			 if (max<a[i])
+			 {
+				 max2=max;
+				 max=a[i];			
+			}
+			else if (max2<a[i]&&a[i]<max)
+			{
+				max2=a[i];
+			}
+		 }
+		 for (int i=0;i<a.length;i++)
+		{
+			if (a[i]==max2)
+			{
+				int c=i;
+             System.out.println(max2);
+			 System.out.println(c);
+			}
+		}
+		
+		System.out.println();
+	}
+}
+
+
+
+4.B哥去参加青年歌手大奖赛,有10个评委打分,(去掉一个最高一个最低)求平均分?
+class  Dome4
+{
+	public static void main(String[] args) 
+	{
+        int []a={1,2,3,4,5,6,7,8,9,10};
+		int sum=0;
+        for (int i=1;i<a.length ;i++ )
+        {
+			for (int j=i+1;j<a.length ;j++ )
+			{
+				if (a[i]<a[j])
+				{
+					int temp=a[i];
+					a[i]=a[j];
+					a[j]=temp;
+				}
+			}
+        }
+		for (int b:a )
+		{
+			sum+=b;
+		}
+		sum=sum-(a[0]+a[9]);
+		System.out.println(sum/8);
+	}
+}
+
+5.利用选择排序对数据进行降序排序u
+class  Dome5
+{
+	public static void main(String[] args) 
+	{
+		int []a={12,34,45,767,5,3};
+		for (int i=0;i<a.length ;i++ )
+		{
+			for (int j=i+1;j<a.length ;j++ )
+			{
+				if (a[i]<a[j])
+				{
+					int temp=a[i];
+					a[i]=a[j];
+					a[j]=temp;
+
+				}
+			}
+		}
+		for (int f:a )
+		o{
+			System.out.println(f);
+		}
+		
+	}
+}
+
+6.定义数组，存放5个学生的成绩【成绩值自己设定】，将成绩从大到小排序，获得成绩之和，平均成绩，最小成绩，最大成绩。
+class  Dome6
+{
+	public static void main(String[] args) 
+	{
+		int []a={78,80,90,78,98};
+		int sum=0;
+		int pin=0;
+		for (int i=0; i<a.length;i++ )
+		{
+			for (int j=i+1;j<a.length ;j++ )
+			{
+				if (a[i]<a[j])
+				{
+					int temp=a[i];
+					a[i]=a[j];
+				    a[j]=temp;
+				}
+			}
+			sum=sum+a[i];
+			pin=sum/5;
+		}
+		System.out.println("成绩和"+sum);
+		System.out.println("成绩平均数"+pin);
+		System.out.println("最大数"+a[0]);
+		System.out.println("最小数"+a[4]);
+	}
+}
