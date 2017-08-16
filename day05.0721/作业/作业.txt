@@ -1,0 +1,286 @@
+一、把原来的作业全部写成方法
+
+
+二、设计方法，分别完成一下功能：
+
+1.将两个数从大到小顺序排列
+class  A1
+{
+	public static void main(String[] args) 
+	{
+		int []a={7,12};
+        paixu(a);
+		for (int c:a)
+		{	
+			System.out.println(c);
+		}
+		
+	}
+   public static void paixu(int [] a)
+ {
+		for (int i=0;i<a.length ;i++ )
+		{
+			if (a[0]<a[1])
+			{
+				int temp=a[0];
+				a[0]=a[1];
+				a[1]=temp;
+			}
+		}
+	}
+}
+
+
+2.输出某个数的绝对值
+import java.util.Scanner;
+class  A2
+{
+	public static void main(String[] args) 
+	{
+		Scanner input=new Scanner(System.in);
+		int a=input.nextInt();
+		yy(a);
+		System.out.println(yy(a));
+	}
+	public static double yy(double a)
+	{
+	    if (a>=0)
+	    {
+			return a;
+	    }else{
+			return -a;
+		}
+	}
+}
+
+
+3.判断某个数是不是水仙花素
+
+import java.util.*;
+class	A3
+{
+	public static void main(String[] args) 
+	{
+         Scanner input=new Scanner(System.in);
+		 int a=input.nextInt();
+		 hh(a);
+	}
+	public static void hh(int a)
+	{   
+		int i,j,k;
+		i=a/100;
+		j=(a/100)%10;
+		k=a%10;
+	    if (a==(i*i*i+j*j*j+k*k*k))
+	    {
+			System.out.println(a+"是水仙花数");
+	    }
+		else{
+		    System.out.println(a+"不是水仙花数");
+		}
+	}
+}
+
+
+4.判断某一年是否是闰年
+
+import java.util.*;
+class  A4
+{
+	public static void main(String[] args) 
+	{
+		Scanner input=new Scanner(System.in);
+		int a=input.nextInt();
+		dd(a);
+
+	}
+	public static void dd(int a)
+	{
+	 if (a%400==0)
+	 {
+		 System.out.println(a+"是闰年");
+
+	 }
+	 else if (a%4==0&&a%100!=0)
+	 {
+		 System.out.println(a+"是闰年");
+	 }
+	 else{
+	     System.out.println(a+"不是闰年");
+	 }
+
+	}
+}
+5.判断某个数是否是素数
+import java.util.*;
+class A5
+{
+	public static void main(String[] args) 
+	{
+        Scanner input=new Scanner(System.in);
+        int a=input.nextInt();
+		sushu(a);
+		System.out.println();
+	}
+	public static void sushu(int a)
+	{
+	    for(int i=2;i<a ;i++ )
+	    {
+			if (a%i==0)
+			{
+				System.out.println("不是质数");
+				return;
+			}	
+	    }
+		System.out.println("是质数");
+	}3
+
+}
+
+
+6.计算从1到某个数的奇数和
+import java.util.*;
+class  A6
+{
+	public static void main(String[] args) 
+	{
+        Scanner input=new Scanner(System.in);
+		int n=input.nextInt();
+		System.out.println(sum(n));
+	}
+	public static int sum(int n)
+	{   int s=0;
+	    int a[]=new int[n];
+		for (int i=0;i<n ;i++ )
+		{  
+		    a[i]=i+1;
+		}
+		for (int d:a )
+		{
+			
+			if(d%2!=0)
+			{
+				s=s+d;
+			}
+		}
+		return s;
+
+	}
+}
+
+
+7.计算从1到某个数之间所有能被3或这17整除的数的个数
+import java.util.*;
+class  A7
+{
+	public static void main(String[] args) 
+	{
+		Scanner input=new Scanner(System.in);
+		int n=input.nextInt();
+		System.out.println(ff(n));
+	}
+	public static int ff(int n)
+	{
+	    int []a=new int[n];
+		int count=0;
+		for (int i=0;i<n ;i++ )
+		{
+			a[i]=i+1;
+		}
+		for (int b:a )
+		{
+			if (b%3==0 || b%17==0 ) 
+			{
+                         	count=count+1;
+               	
+	                 }
+		       	
+		}
+		return count;
+	}
+}
+
+
+8.计算1到某个数之间所有能被7或3整除，但不能同时被这两个数整除的数的个数
+import java.util.*;
+class  A8
+{
+	public static void main(String[] args) 
+	{
+		Scanner input=new Scanner(System.in);
+		int n=input.nextInt();
+		System.out.println(ff(n));
+	}
+	public static int ff(int n)
+	{
+	    int []a=new int[n];
+		int count=0;
+		for (int i=0;i<n ;i++ )
+		{
+			a[i]=i+1;
+		}
+		for (int b:a )
+		{
+			if (b%3==0 || b%17==0 && b%21!=0) 
+			{
+                         	count=count+1;
+               	
+	                 }
+		       	
+		}
+		return count;
+	}
+}
+
+9.计算某个整形数组中奇数的个数和偶数的个数
+ import java.util.*;
+class  A9
+{
+	public static void main(String[] args) 
+	{
+		Scanner input=new Scanner(System.in);
+		int a[]={1,2,3,4,5,6,7,8,9,10};
+		ss(a);
+	}
+	public static void ss(int []a)
+	{
+		int count=0;
+		int count1=0;
+	for (int b:a )
+	{
+		if (b%2==0)
+		{
+			count =count+1;		
+		}
+		else{
+		    count1=count1+1;		
+		}
+	}
+	System.out.println("偶数个数"+count);
+	System.out.println("奇数个数"+count1);
+	}
+}
+
+
+10.从某个整形数组中找出指定的元素
+class  A10
+{
+	public static void main(String[] args) 
+	{   
+		 int a[]={1,2,3,4,5,6,7};
+		 int n=4;
+		 int m=dd(a,n);
+		System.out.println(m);
+	}
+	public static int  dd(int []a,int n)
+	{    int s=0;
+	    for (int i=0;i<a.length ; i++)
+	    {
+			if (a[i]==4)
+			{
+				s=i;
+			}
+	    }
+	return s;
+	}
+}
