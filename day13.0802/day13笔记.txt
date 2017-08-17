@@ -1,0 +1,194 @@
+一、默写：
+  1.默写单例懒汉式：
+
+  2.产生一个1~6的随机数
+	（int）（Math.random()*(6-1+1)+1）
+
+  3.设计一个方法，将一个字符串中每一个英文单词的首字母大写，返回一个新的字符串
+	hello  world
+	public String change(String str){
+		//第一种方法将str转成一个字符数组
+		char[] chs = str.toCharArray();
+
+		//使用空格将字符串拆分
+		String[] strs = str.split("[ ]");
+		for(int i=0; i<strs.length; i++){
+			String temp = strs[i];
+			strs[i] = "";
+			for(int j=0; j<temp.length(); j++){
+				if(j==0){
+				 strs[i] += (char)(temp.charAt(j)-32);
+				}else{
+					strs[i] += temp.charAt(j);
+				}
+			}
+		}
+	}
+
+  4.设计一个方法，计算两个字符串表示的数值的和（不考虑字符串内容不是数字的情况）
+	public double add(String str1, String str2){
+		double sum = 0;
+		sum += Double.parseDouble(str1);
+		sum += Double.parseDouble(str2);
+		return sum;
+	}
+
+二、回顾：（常用类）
+  1.String
+	字符串
+
+  2.StringBuffer和StringBuilder
+	不是字符串
+
+  3.包装类
+
+  4.Date类：对日期进行操作的类
+
+  5.SimpleDateFormat类
+	format(Date date)：将一个Date类的对象转换成字符串表现形式
+	parse(String str)：将一个指定格式的描述时间的字符串转换Date对象
+
+  6.Random类：伪随机数类
+	使用线性同余公式：每个随机数是一个固定的数列中的元素
+
+  7.Math类：
+	abs：绝对值
+	max、min
+	sqrt：正平方根
+	cbrt：立方根
+	pow：幂运算
+	random()：求随机数：0~1之间double值
+	E、PI
+
+  8.System类：
+	in、out、err
+
+	gc：垃圾回收器
+	exit：停止当前正在执行的jvm
+
+
+  9.Calendar类
+	主要是静态常量属性
+	get、set
+	getActrulMaximum()
+
+三、枚举：
+  1.什么是枚举：
+	就是一个规定了取值范围的变量
+
+  2.声明枚举：enum
+	格式：
+	public enum A{
+		//成员
+		//此枚举类型的取值范围
+	}
+
+	public enum Week{
+		//把所有的星期都列出来
+	}
+
+  3.枚举的成员：
+	1）取值范围：
+	2）可以声明方法：但一般不在枚举中声明方法
+
+	注意：
+	1）每一个枚举值之间使用逗号隔开
+	2）最后一个枚举值后可以不加任何分隔符号
+	3）若需要在枚举中声明方法，最后一个枚举值后必须加分号
+	4）枚举中声明的方法必须在枚举值之后声明
+	5）一般不在枚举中声明方法
+
+  4.枚举的使用：
+	结合switch-case语句使用
+
+  5.由于switch小括号中表达式可以使字符串类型：
+	在jdk1.5前不可以是字符串，在jdk1.5以后可以使用字符串，字符串比枚举用起来更灵活更方便，所以枚举渐渐退出市场
+
+
+四、异常：
+  1.Throwable类：
+	两个已知子类：Error错误、Exception异常
+
+  2.什么是异常：
+	在程序运行过程中，由于设计或外部原因，造成的程序中断的现象
+
+  3.异常的分类：
+	1）运行时异常：RuntimeException
+	在编译时不会被发现，但是执行时出现的重大逻辑错误
+	常见的运行时异常：
+	NullPointerException	空指针异常
+	ArithmeticException	算术异常
+	ArraysIndexOutOfBoundsException		数组下标越界异常
+	StringIndexOutOfBoundsException		字符串下标越界异常
+	NumberFormatException		数字格式异常
+	ClassCastException		类型转换异常
+
+	2）非运行时异常：检查异常
+	在编译时就会被发现，但是执行时可能发生，也可能不发生的异常，为了保证程序可以正常执行，所以必须对异常进行处理
+
+五、异常处理：
+  1.throw关键字
+	表示在程序中声明一个异常
+	格式
+	throw 异常对象
+
+  2.上抛异常：使用throws关键字
+	使用throws关键字将异常上抛到方法的签名后
+	public void fun() throws 异常类型名 {
+		throw new Exception();
+	}
+
+	作用：告知方法的调用者此方法有异常可能发生也可能不发生，但是我自己没处理，你若想用我，必须做出处理
+
+  3.捕获异常：
+	try{
+	
+	}catch(){
+		
+	}...
+	finally{}
+
+	处理异常的格式：
+	try{
+		//可能发生异常的功能代码
+	}catch(异常类型1 异常引用1){
+		//异常处理代码1
+	}catch(异常类型2 异常引用2){
+		//异常处理代码2
+	}finally{
+		//最后被执行的代码
+	}
+
+	注意：
+	1）catch块可以有多个，但是上面的异常类型不能大于下面的异常类型
+	2）finally块可以省略
+	3）finally块最后被执行，在方法结束之前执行finally快中的代码
+		不管前面执行的try还是catch
+
+  4.两种处理异常的区别：
+	都是对异常进行处理
+	捕获异常是方法本身对异常进行处理
+	上抛是方法自己不处理告诉调用者需要处理
+
+
+六、自定义异常：
+  步骤：
+	1）声明一个类，继承Exception类（非运行时异常）
+		或RuntimeException（运行时异常）
+	2）在类中设计一个带字符串参数的构造方法，在构造方法中调用父类的带参数构造方法
+	3）使用异常
+
+	若想自定义一个运行时异常，继承RuntimeException
+
+
+
+
+
+
+
+
+
+
+
+
+
