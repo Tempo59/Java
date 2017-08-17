@@ -1,0 +1,206 @@
+一、默写：
+  1.默写单例饿汉式
+
+  2.设计一个圆形类（Circle），半径属性，计算面积、周长功能
+	设计一个圆柱类（Column），继承圆形类，私有高属性，求体积、表面积
+
+public class Circle{
+	protected double r;
+	//构造方法
+	public Circle(){}
+	public Circle(double r){
+		this.r = r;
+	}
+	//get、set
+	//计算面积
+	public double area(){
+		retrun Math.PI * r * r;
+	}
+	//计算周长
+	public double sum(){
+		return Math.PI * 2 * r;
+	}
+}
+
+public class Column extends Circle{
+	private double h;
+	public Column(){}
+	public Column(double r,double h){
+		this.r = r;//super(r);
+		this.h = h;
+	}
+	//体积
+	public double V(){
+		return area() * h;
+	}
+	//表面积
+	public double areaAll(){
+		return area() * 2 + sum() * h;
+	}
+}
+
+二、回顾：
+  1、继承：
+	extends关键字
+	public class 子类 extends 父类 {}
+
+  2.不能继承的成员：
+	私有成员、构造方法（子类构造方法中自动调用父类的无参数构造方法，可以手动调用带参的）
+
+  3.super关键字：
+	super.属性
+	super.方法
+	super()
+
+  4.方法重写：
+	在类中对继承来的方法进行完善
+	Override
+
+  5.final关键字：
+	修饰变量：常量
+	修饰方法：可以被继承，不能被重写
+	修饰类：不可以被继承
+
+	补充：final修饰的引用类型
+	final int a = 3;
+	//a = 4;
+	final Person p = new Person("Tom",12);
+	p.setName("Anna");//可以修改
+
+	p = new Person();
+
+  6.Object类：
+	equals(Object obj)：比较两个对象是否相等
+
+	Person p = new Person();
+	Person p1 = new Person();
+
+	System.out.println(p==p1);
+	System.out.println(p.equals(p1));
+
+	hashCode()：返回对象的哈希码
+
+	toString()：返回对象的字符串形式
+	当输出一个对象时，自动调用toString方法
+
+
+三、多态：
+  1.多态：
+	对象的多种形态，方法的多样性
+
+  2.多态的表现形式：
+	对象的多种形态：父类的引用可以指向子类的实例
+		接口的引用可以指向实现类的实例
+
+	方法的多样性：
+		1）方法的重载
+		2）方法的重写
+
+四、对象转型：
+  1.基本数据类型类型转换：
+	优先级
+	自动转换：从低级向高级转
+	强制转换：从高级向低级转
+
+  2.对象转型：
+	对于对象而言，父类是高级，子类是低级
+	自动转型：从低级向高级转，从子类转型父类（父类引用指向子类实例）
+	强制转型：从高级向低级转,从父类转向子类
+
+	Animal a = new Dog();
+
+	Dog d = (Dog)a;
+
+	必须保证a中存储的是Dog类的对象，否则抛出ClassCastException（类型转换异常）
+
+	对象转型过程中不会开辟新的空间
+
+  3.如何避免此异常抛出：
+	instanceof关键字：可以理解为一个运算符，结果是布尔类型数据
+	使用语法：
+	boolean boo = obj instanceof A;
+
+	说明：
+	判断obj是否是A类或A子类的对象，若是返回true，否则返回false
+
+	避免抛出异常的格式
+
+	Animal a = new Animal();
+	Dog d = null;
+	if(a instanceof Dog){
+		d = (Dog)a;
+	}
+	//之后的代码中可以使用d调用方法
+
+	//由于父类引用不可以访问子类中的独有成员，所以必须将对象转成子类	//对象才可以调用
+
+
+	案例：
+	设计一个Fruit类，姓名，产地，解渴功能
+	设计一个Apple类，继承Fruit类，榨汁方法
+	设计一个Pair类，继承Fruit类，止咳方法
+
+	设计一个工具类，判断一个水果是苹果还是梨。若是苹果调用榨汁方法，若是梨，调用止咳方法
+
+五、抽象类和抽象方法：
+  1.抽象方法：
+	在一个类中设计一个方法不写方法体，添加分号
+	public void fun();
+	方法报错：解决方法
+		添加方法体
+		将方法设置成抽象方法
+
+	使用abstract关键字将方法设置为抽象方法
+
+  2.抽象方法的特点：
+	1）没有方法体，需要使用分号表示声明结束
+	2）抽象方法所在的类必须是抽象类
+
+  3.抽象类
+	使用abstract关键字修饰的类是抽象类，抽象类中可以没有抽象方法
+
+  4.抽象类的特点：
+	1）可以有抽象方法，也可没有抽象方法；
+	2）有构造方法，但是不能创建对象；
+	3）抽象类的存在就是为了被继承，而且只有非抽象子类才可以创建对象
+
+  5.抽象类和非抽象类的区别：
+	1）抽象类需要使用abstract修饰，非抽象类不用；
+	2）抽象类中可以有也可以没有抽象方法，非抽象类中只能有非抽象方法；
+	3）抽象类不可以创建对象，非抽象类可以创建对象。
+
+  6.思考：final和abstract是否可以连用？
+	final修饰的类不能被继承，abstract修饰的类就是为了被继承，两个关键字的功能相互冲突，所以不能使用这两个关键字同时修饰一个类
+
+	final修饰的方法可以被继承不能被重写，abstract修饰的方法就是为了被重写，两个关键字的作用相互冲突，所以不能使用这两个关键字同时修饰一个方法
+
+
+案例：一个公司有四类员工，每个员工都具有姓名，编号，工资，工资级别属性
+  技术员，工资组成：每小时的酬金（hourlyPay）和工作的小时数（hours）乘积
+  销售员，工资组成：当月的销售额（sales）和提成（bonus）乘积
+销售经理，工资组成：部门总销售额（sales）和经理提成（bonus）乘积加上固定月薪（monthlyPay）
+  总经理：工资组成：固定年薪
+
+	根据要求设计类：
+	每一个员工具有自我介绍的功能，格式如下：
+我是xxx，我的编号是xxx，我是一个xxx，我的工资是xx，我的工资级别是xx
+
+	工资级别：
+	<3000		1
+	3000~5000	2
+	5000~8000	3
+	>8000		4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
