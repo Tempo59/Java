@@ -1,0 +1,108 @@
+一、默写：
+  设计一个方法，判断一个字符串中数字、字母、_和其他字符的个数
+	public static void fun(String str){
+		//第一种方法
+		//char[] ch = str.toCharArray();
+		//第二种方法
+		//for(int i=0; i<str.length(); i++){
+			//第一种
+			//if(str.charAt(i)>='0'&&str.charAt(i)<='9'){
+			//
+			//}
+			//第二种方法
+			if((str.charAt(i)+"").matches("[0-9]")){}
+			//\\d
+			//[a-zA-Z]
+			//[_]
+		}
+	}
+
+
+二、回顾：
+  1.String类：
+	字符串是常量
+
+  2.String类中的常用方法：
+	charAt(int index)
+	compareTo(String str)
+	concat(String str)拼接
+	indexOf(int ch)
+	indexOf(String str)
+	lastIndexOf(int ch)
+	trim()去掉首位的空白
+	static valueOf(任意类型)
+
+  3.StringBuffer和StringBuilder
+	append
+	insert
+	delete
+	reverse
+
+	StringBuffer中的方法全部都是线程安全的
+	StringBuilder中的方法都是线程不安全的
+
+  4.包装类：
+	int----Integer
+	char---Character
+
+	自动装箱和自动拆箱
+
+	字符串和基本类型相互转换：
+
+三、其他常用类：
+	Date，SimpleDateFormat、Math、Random、System、Calendar
+
+  1.Date类：日期类
+	构造方法：Date()
+		Date(long s)从1970年1.1开始计算毫秒数
+
+	成员方法：getXx和setXx方法
+
+  2.SimpleDateFormat类：简单日期格式化
+	format(Date date):将一个Date类的对象转换成字符串表现形式
+	parse(String str);将一个指定格式的描述时间的字符串转换成Date对象
+
+  3.Random类：伪随机数类
+	使用线性同余公式:每一个随机数是一个固定的数列中的元素
+		
+  4.Math类：数学类
+	此类中提供了一组数学公式
+	abs：绝对值
+	max：较大数（两个）
+	min：较小数（两个）
+	pow：幂运算
+	random：随机数
+		求a~b之间的一个随机数
+		（int）（Math.random()*（b-a+1）+a）
+		2~8
+		(int)(Math.random()*(8-2+1)+2)
+	sqrt：正平方根
+	cbrt：立方根
+
+  5.System类：
+	三个属性：in、out、err
+
+
+  6.Calendar类：日历类
+	常用方法：见文档
+
+	案例：万年历
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
