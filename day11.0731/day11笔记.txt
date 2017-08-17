@@ -1,0 +1,195 @@
+一、默写
+  1.设计一个成员内部类，有fun方法
+	主方法中创建成员内部类对象调用fun方法
+
+  2.关键字：
+	访问当前对象成员（this）、访问父类总成员（super）、声明接口（interface）、继承接口关键(extends)、实现接口(implements)
+
+  3.final关键字用法
+
+  4.static关键字用法
+
+二、回顾
+  1.什么是面向对象
+
+  2.类和对象
+	类是对象的模板（抽象）
+	对象是类的实例
+
+  3.类的成员：
+	1）数据成员：成员数据，成员变量，属性
+	2）成员方法：方法成员，行为功能
+	3）构造方法：初始化对象的属性，用作创建对象使用（使用new关键字）
+
+  4.面向对象特征：
+	抽象、封装、继承、多态
+
+  5.封装：
+	private关键字：私有访问权限
+
+  6.get/set方法
+	get：有返回值，没有参数，将要访问的属性作为方法的返回值
+	set：有参数，没有返回值，参数表示要把属性修改为什么值
+
+  7.this关键字：
+	this.属性
+	this.方法
+	this()
+
+  8.static关键字：
+	修饰属性和方法
+	修饰代码块
+	修饰成员内部类：自动升级为普通类，相当于一个独立的类
+
+  9.继承：extends
+	类是单继承
+	不会被继承的成员：私有的，构造方法
+
+  10.方法的重写
+	在类中的从父类继承来的方法进行完善
+
+  11.super关键字：
+	super.属性：
+	super.方法
+	super()
+
+  12.final关键字
+	1）修饰变量：常量
+	2）修饰方法：可以被继承，但不能被重写
+	3）修饰类：不可以被继承
+
+  13.Object类：所有类的父类
+	toString
+	equals
+	hashCode
+
+  14.多态：对象的多种形态，方法的多样性
+
+  15.抽象方法和抽象类：
+	abstract关键字
+
+  16.对象转型：
+	自动转型：从子转父
+	强制转换：从父转子
+	避免ClassCastException异常抛出
+
+	使用instanceof关键判断对象是否是某个类或子类的对象
+
+  17.接口：interface
+	1）接口中一般申明的方法是共有抽象的public abstract
+	2）接口中的属性是共有静态常量属性public static final
+
+	3）static关键字修饰的方法可以有方法体
+		default关键字修饰的方法也可以有方法体
+
+三、字符串：不是基本类型，是一个类
+  1.字符串常量
+	数据是常量，字符串数据存储在常量池中
+
+  2.字符串类中的常用方法:
+	1）char charAt(int index)按下标访问字符串中的某个字符
+	字符串的字符下标从0开始，最后一个字符的下标是字符串长长度减一
+	在使用此方法时 注意StringIndexOutOfBoundsException
+
+	其实ArrayIndexOutOfBoundsException和
+	StringIndexOutOfBoundsException都是
+	IndexOutOfBoundsException的子类
+
+	2）字符串的长度：
+	数组的长度：数组名.length
+	字符串中具有length()方法
+
+四、正则表达式
+  1.什么是正则表达式：一个字符串
+	一个判断字符串格式是否正确的字符串
+
+  2.如何判断格式
+	使用String类中的matches方法使用正则表达式对字符串格式进行验证
+
+  3.split方法：
+
+五、StringBuffer和StringBuilder
+  这两个类不是字符串类，这两个类是字符串的缓冲区，这两个类中提供了一组对字符串进行操作的方法
+
+  1.StringBuffer类：
+	常用的方法：
+	append：追加
+	delete：删除
+	insert：插入
+	reverse：将缓冲区中的所有字符翻转
+
+  2.对字符串操作时，StringBuffer的速度比String块
+	案例：
+	在一个原有字符串的基础上追加字符，查看时间
+
+  3.StringBuilder类：
+	成员方法和StringBuffer类完全一样，此类中的方法都是非线程安全的
+	StringBuffer类中的方法是线程安全的
+
+	StringBuilder是jdk1.5新增的类
+
+六、基本数据类型的包装类：
+  1.基本数据类型是否可以调用方法？
+	基本类型数据是不可以调用方法的
+
+  2.基本类型的包装类
+	byte		Byte
+	short		Short
+	int		Integer
+	long		Long
+	float		Float
+	double		Double
+	char		Character
+	boolean		Boolean
+
+  3.装箱和拆箱
+	装箱：使用基本类型包装类的构造方法将基本类型包装成对象
+	int a = 4;
+	Integer i = new Integer(a);
+
+	拆箱：使用包装类中的xxValue方法将引用类型拆箱成基本类型
+	Double d = new Double(3.14);
+	double a = d.doubleValue();
+
+  4.自动拆箱和自动装箱：
+	在jdk1.5以后新增的功能
+	自动装箱：将基本类型数据直接赋值给引用对象
+	int a = 3;
+	Integer i = a;
+
+	自动拆箱：将引用对象直接赋值给基本类型变量
+	Integer i = new Integer(4);
+	int a = i;
+
+  5.字符串和基本类型之间的相互转换
+	1）基本类型转字符串：
+	i.和字符串进行连接：
+		int a = 3;
+		String str = "" + a;
+	ii.String类中的valueOf方法：
+		int a = 3;
+		String str = String.valueOf(a);
+
+	2）字符串转基本类型数据：
+	i.包装类中的valueOf方法：现将字符串转成包装类对象，再自动拆箱
+		String s = "123";
+		int a = Integer.valueOf(s);
+	
+	ii.包装类中的parseXx方法：直接将字符串转成基本类型
+		String s = "123";
+		int a = Integer.parseInt(s);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
